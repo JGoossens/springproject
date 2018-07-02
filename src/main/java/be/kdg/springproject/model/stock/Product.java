@@ -1,16 +1,25 @@
 package be.kdg.springproject.model.stock;
 
-public final class Product
+import javax.persistence.*;
+
+@Entity
+@Table
+public class Product
 {
-    private static int SEQUENCE_GENERATOR;
-    private int product_id;
+
+    @Id
+    @GeneratedValue
+    @Column(name = "ProductId", nullable = false)
+    private Integer productId;
     private String description;
     private Double price;
     private String categoryName;
 
+    public Product() {
+    }
+
     public Product(String description, Double price, String categoryName)
     {
-        this.product_id = SEQUENCE_GENERATOR++;
         this.description = description;
         this.price = price;
         this.categoryName = categoryName;
