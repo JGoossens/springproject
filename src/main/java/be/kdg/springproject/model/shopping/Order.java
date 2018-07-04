@@ -1,17 +1,47 @@
 package be.kdg.springproject.model.shopping;
 
+import org.apache.tomcat.jni.Local;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
+@Entity
+@Table
 public class Order
 {
+
+    @Id
+    @GeneratedValue
+    @Column(name = "OrderId", nullable = false)
+    private Integer orderId;
+
+    @OneToMany(targetEntity = LineItem.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Collection<LineItem> lineItems;
-    private Date orderDate;
+
+    @Column
+    private LocalDateTime orderDate;
+
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
+
+    public void setLineItems(Collection<LineItem> lineItems) {
+        this.lineItems = lineItems;
+    }
+
+    public void setOrderDate(LocalDateTime orderDate) {
+        this.orderDate = orderDate;
+    }
 
     public Order()
     {
-        orderDate = new Date();
+        orderDate = LocalDateTime.now();
         lineItems = new ArrayList<LineItem>();
     }
 
@@ -31,7 +61,7 @@ public class Order
     /**
      * @return
      */
-    public Date getOrderDate()
+    public LocalDateTime getOrderDate()
     {
         return this.orderDate;
     }

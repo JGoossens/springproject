@@ -1,16 +1,25 @@
 package be.kdg.springproject.model.user;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
-
+@Entity
+@Table
 public class Person implements Serializable {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "PersonId", nullable = false)
     private Integer personId;
 
+    @OneToOne(targetEntity = Address.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name="AddressId")
     private Address address;
 
+    @Column
     private String firstname;
 
+    @Column
     private String lastname;
 
     public Person() {
@@ -35,6 +44,8 @@ public class Person implements Serializable {
     public String getFirstname() {
         return this.firstname;
     }
+
+
 
     public void setFirstname(String firstname) {
         this.firstname = firstname;

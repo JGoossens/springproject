@@ -3,12 +3,21 @@ package be.kdg.springproject.model.user.roles;
 import be.kdg.springproject.model.user.exceptions.UserException;
 import be.kdg.springproject.model.user.User;
 
+import javax.persistence.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Entity
+@Table
 public abstract class Role {
+
+    @Id
+    @GeneratedValue
+    @Column(name = "RoleId", nullable = false)
     private Integer roleId;
+
+    @ManyToOne(targetEntity = User.class)
     private User user;
 
     public static <T extends Role> boolean hasRole(User user, Class<T> role) throws UserException {
@@ -35,6 +44,14 @@ public abstract class Role {
 
     public Integer getRoleId() {
         return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public static List<Role> createRoles(List<RoleType> roleTypes) {

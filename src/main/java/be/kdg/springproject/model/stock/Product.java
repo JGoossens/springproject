@@ -11,9 +11,18 @@ public class Product
     @GeneratedValue
     @Column(name = "ProductId", nullable = false)
     private Integer productId;
+
+    @Column
     private String description;
+
+    @Column
     private Double price;
+
+    @Column
     private String categoryName;
+
+    @OneToOne(targetEntity = StockItem.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "product")
+    private StockItem stockItem;
 
     public Product() {
     }
@@ -23,6 +32,7 @@ public class Product
         this.description = description;
         this.price = price;
         this.categoryName = categoryName;
+        this.stockItem = new StockItem();
     }
 
     /**
@@ -77,15 +87,30 @@ public class Product
      */
     public int getProduct_id()
     {
-        return product_id;
+        return productId;
     }
 
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
+
+    public StockItem getStockItem() {
+        return stockItem;
+    }
+
+    public void setStockItem(StockItem stockItem) {
+        this.stockItem = stockItem;
+    }
 
     @Override
     public int hashCode()
     {
         int hash = 5;
-        hash = 47 * hash + this.product_id;
+        hash = 47 * hash + this.productId;
         return hash;
     }
 
@@ -101,6 +126,6 @@ public class Product
             return false;
         }
         final Product other = (Product) obj;
-        return this.product_id == other.product_id;
+        return this.productId == other.productId;
     }
 }

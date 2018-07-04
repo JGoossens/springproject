@@ -2,19 +2,30 @@ package be.kdg.springproject.model.shopping;
 
 import be.kdg.springproject.model.stock.Product;
 
+import javax.persistence.*;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public final class Cart
+@Entity
+@Table
+public class Cart
 {
-    private final Map<Product, CartItem> cartItems;
+    @Id
+    @GeneratedValue
+    @Column(name = "CartId", nullable = false)
+    private Integer cartId;
+
+    @OneToMany(targetEntity = CartItem.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="cart")
+    private final Map<Integer, CartItem> cartItems;
 
     public Cart()
     {
-        this.cartItems = new ConcurrentHashMap<Product, CartItem>();
+        this.cartItems = new ConcurrentHashMap<>();
     }
 
-    public Map<Product, CartItem> getCartItems()
+
+
+    public Map<Integer, CartItem> getCartItems()
     {
         return this.cartItems;
     }
@@ -49,6 +60,14 @@ public final class Cart
             cartItem = new CartItem(product, amount);
             cartItems.put(product, cartItem);
         }
+    }
+
+    public Integer getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(Integer cartId) {
+        this.cartId = cartId;
     }
 
     public Double getTotalPrice()

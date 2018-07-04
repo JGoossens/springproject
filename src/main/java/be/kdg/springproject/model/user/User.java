@@ -1,7 +1,9 @@
 package be.kdg.springproject.model.user;
 
 import be.kdg.springproject.model.user.roles.Role;
+import org.hibernate.annotations.Fetch;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,16 +15,27 @@ import java.util.List;
  *
  * @author wouter
  */
+@Entity
+@Table
 public class User implements Serializable {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "UserId", nullable = false)
     private Integer userId;
 
+    @Column
     private String username = null;
 
+    @Column
     private String encryptedPassword;
 
+    @OneToOne(targetEntity = Person.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name= "PersonId", nullable = false)
     private Person person;
 
+    @OneToMany(targetEntity = Role.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+    @Fetch(org.hibernate.annotations.FetchMode.SELECT)
     private List<Role> roles;
 
     public User() {
@@ -34,6 +47,22 @@ public class User implements Serializable {
         this.username = username;
         this.encryptedPassword = encryptedPassword;
         this.roles = roles;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEncryptedPassword() {
+        return encryptedPassword;
+    }
+
+    public void setEncryptedPassword(String encryptedPassword) {
+        this.encryptedPassword = encryptedPassword;
     }
 
     public Person getPerson() {

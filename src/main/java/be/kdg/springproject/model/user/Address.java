@@ -1,5 +1,6 @@
 package be.kdg.springproject.model.user;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -8,16 +9,26 @@ import java.io.Serializable;
  *
  * @author wouter
  */
+
+@Entity
+@Table
 public class Address implements Serializable {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "AddressId", nullable = false)
     private Integer addressId;
 
+    @Column
     private String street;
 
+    @Column
     private String nr;
 
+    @Column
     private String zip;
 
+    @Column
     private String city;
 
     public Address() {
@@ -37,6 +48,8 @@ public class Address implements Serializable {
     public String getStreet() {
         return this.street;
     }
+
+
 
     public void setStreet(String street) {
         this.street = street;

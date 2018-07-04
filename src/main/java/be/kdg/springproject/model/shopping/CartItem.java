@@ -2,14 +2,60 @@ package be.kdg.springproject.model.shopping;
 
 import be.kdg.springproject.model.stock.Product;
 
-public final class CartItem
-{
-    private final Product product;
-    private final Integer amount;
+import javax.persistence.*;
 
-    public CartItem(Product product, Integer amount)
+@Entity
+@Table
+public class CartItem
+{
+    @Id
+    @GeneratedValue
+    @Column(name = "CartItemId", nullable = false)
+    private Integer cartItemId;
+
+    @OneToOne(targetEntity = Product.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "ProductId")
+    private Product product;
+
+    @ManyToOne(targetEntity = Cart.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name="CartId",nullable = false)
+    private Cart cart;
+
+    @Column(name="Amount",nullable = false)
+    private Integer amount;
+
+    public CartItem() {
+        this.amount= 0;
+    }
+
+    public CartItem(Cart cart, Product product, Integer amount)
     {
+        this.cart = cart;
         this.product = product;
+        this.amount = amount;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public Integer getCartItemId() {
+        return cartItemId;
+    }
+
+    public void setCartItemId(Integer cartItemId) {
+        this.cartItemId = cartItemId;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
