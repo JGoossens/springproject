@@ -1,4 +1,4 @@
-package be.kdg.springproject.model.user.roles;
+package be.kdg.springproject.dom.user.roles;
 
 public class Adminstrator extends Role {
 

@@ -1,13 +1,12 @@
-package be.kdg.springproject.model.user.roles;
+package be.kdg.springproject.dom.user.roles;
 
-import be.kdg.springproject.model.shopping.Cart;
-import be.kdg.springproject.model.shopping.CartItem;
-import be.kdg.springproject.model.shopping.LineItem;
-import be.kdg.springproject.model.shopping.Order;
+import be.kdg.springproject.dom.shopping.Cart;
+import be.kdg.springproject.dom.shopping.CartItem;
+import be.kdg.springproject.dom.shopping.LineItem;
+import be.kdg.springproject.dom.shopping.Order;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * A Client can post repairs to the system.

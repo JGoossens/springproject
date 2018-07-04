@@ -1,6 +1,4 @@
-package be.kdg.springproject.model.shopping;
-
-import org.apache.tomcat.jni.Local;
+package be.kdg.springproject.dom.shopping;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
-package be.kdg.springproject.model.shopping;
+package be.kdg.springproject.dom.shopping;
 
-import be.kdg.springproject.model.stock.Product;
+import be.kdg.springproject.dom.stock.Product;
 
 import javax.persistence.*;
 

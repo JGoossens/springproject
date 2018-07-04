@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package be.kdg.springproject.model.stock.exceptions;
+package be.kdg.springproject.dom.stock.exceptions;
 
 /**
  * @author deketelw

@@ -1,4 +1,4 @@
-package be.kdg.springproject.model.shopping;
+package be.kdg.springproject.dom.shopping;
 
 import javax.persistence.*;
 

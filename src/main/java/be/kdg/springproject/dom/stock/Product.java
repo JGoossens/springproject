@@ -1,4 +1,4 @@
-package be.kdg.springproject.model.stock;
+package be.kdg.springproject.dom.stock;
 
 import javax.persistence.*;
 
@@ -85,17 +85,8 @@ public class Product
      *
      * @return
      */
-    public int getProduct_id()
-    {
-        return productId;
-    }
-
     public Integer getProductId() {
         return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
     }
 
     public StockItem getStockItem() {

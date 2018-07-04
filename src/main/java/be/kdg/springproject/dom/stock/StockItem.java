@@ -1,4 +1,4 @@
-package be.kdg.springproject.model.stock;
+package be.kdg.springproject.dom.stock;
 
 import javax.persistence.*;
 

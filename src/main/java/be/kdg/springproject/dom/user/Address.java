@@ -1,4 +1,4 @@
-package be.kdg.springproject.model.user;
+package be.kdg.springproject.dom.user;
 
 import javax.persistence.*;
 import java.io.Serializable;

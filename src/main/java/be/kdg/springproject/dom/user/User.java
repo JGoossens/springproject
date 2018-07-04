@@ -1,6 +1,6 @@
-package be.kdg.springproject.model.user;
+package be.kdg.springproject.dom.user;
 
-import be.kdg.springproject.model.user.roles.Role;
+import be.kdg.springproject.dom.user.roles.Role;
 import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;

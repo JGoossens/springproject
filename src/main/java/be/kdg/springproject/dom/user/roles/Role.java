@@ -1,7 +1,7 @@
-package be.kdg.springproject.model.user.roles;
+package be.kdg.springproject.dom.user.roles;
 
-import be.kdg.springproject.model.user.exceptions.UserException;
-import be.kdg.springproject.model.user.User;
+import be.kdg.springproject.dom.user.exceptions.UserException;
+import be.kdg.springproject.dom.user.User;
 
 import javax.persistence.*;
 import java.util.List;

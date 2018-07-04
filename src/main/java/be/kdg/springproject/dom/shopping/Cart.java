@@ -1,6 +1,6 @@
-package be.kdg.springproject.model.shopping;
+package be.kdg.springproject.dom.shopping;
 
-import be.kdg.springproject.model.stock.Product;
+import be.kdg.springproject.dom.stock.Product;
 
 import javax.persistence.*;
 import java.util.Map;
@@ -49,16 +49,16 @@ public class Cart
             if (newAmount > 0)
             {
                 // cartItem is final daarom constructor aanroepen
-                cartItem = new CartItem(product, newAmount);
-                cartItems.put(product, cartItem);
+                cartItem = new CartItem(this, product, newAmount);
+                cartItems.put(product.getProductId(), cartItem);
             }
             else
                 cartItems.remove(product);
         }
         else
         {
-            cartItem = new CartItem(product, amount);
-            cartItems.put(product, cartItem);
+            cartItem = new CartItem(this, product, amount);
+            cartItems.put(product.getProductId(), cartItem);
         }
     }
 
