@@ -15,8 +15,8 @@ import java.io.Serializable;
 public class Address implements Serializable {
 
     @Id
-    @GeneratedValue
-    @Column(name = "AddressId", nullable = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "ADDRESS_ID", nullable = false)
     private Integer addressId;
 
     @Column

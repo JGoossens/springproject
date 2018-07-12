@@ -9,16 +9,19 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Entity
-@Table
+@DiscriminatorColumn(name = "RoleType", discriminatorType = DiscriminatorType.STRING)
 public abstract class Role {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "RoleId", nullable = false)
     private Integer roleId;
 
-    @ManyToOne(targetEntity = User.class)
+    @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "USER_USER_ID")
     private User user;
+
+
 
     public static <T extends Role> boolean hasRole(User user, Class<T> role) throws UserException {
         try {

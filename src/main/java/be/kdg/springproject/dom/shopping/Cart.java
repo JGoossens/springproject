@@ -12,7 +12,7 @@ public class Cart
 {
     @Id
     @GeneratedValue
-    @Column(name = "CartId", nullable = false)
+    @Column(name = "CART_ID", nullable = false)
     private Integer cartId;
 
     @OneToMany(targetEntity = CartItem.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="cart")

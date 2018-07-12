@@ -8,12 +8,12 @@ import java.io.Serializable;
 public class Person implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "PersonId", nullable = false)
     private Integer personId;
 
     @OneToOne(targetEntity = Address.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name="AddressId")
+    @JoinColumn(name="ADDRESS_ID")
     private Address address;
 
     @Column

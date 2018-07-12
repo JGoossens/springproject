@@ -8,7 +8,7 @@ public class Product
 {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ProductId", nullable = false)
     private Integer productId;
 
@@ -18,7 +18,7 @@ public class Product
     @Column
     private Double price;
 
-    @Column
+    @Column(name = "CATEGORY")
     private String categoryName;
 
     @OneToOne(targetEntity = StockItem.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "product")

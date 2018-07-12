@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class CartItem
 {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CartItemId", nullable = false)
     private Integer cartItemId;
 

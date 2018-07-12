@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class StockItem
 {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "StockItemId", nullable = false)
     private Integer stockItemId;
 
@@ -15,7 +15,7 @@ public class StockItem
     private Integer amount;
 
     @OneToOne(targetEntity = Product.class)
-    @JoinColumn(name = "ProductId")
+    @JoinColumn(name = "MY_PRODUCT_ID")
     private Product product;
 
 

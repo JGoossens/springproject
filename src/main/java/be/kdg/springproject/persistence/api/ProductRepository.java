@@ -8,9 +8,9 @@ import java.util.Collection;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     Product findProductByDescription(String description);
-
     Collection<Product> findProductsByCategoryName(String categoryName);
 
     @Query(value = "SELECT distinct p.categoryName from Product p")
     Collection<String> getCategories();
+
 }

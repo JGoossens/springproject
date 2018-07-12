@@ -16,11 +16,11 @@ import java.util.List;
  * @author wouter
  */
 @Entity
-@Table
+@Table(name = "USERS")
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "UserId", nullable = false)
     private Integer userId;
 
@@ -31,7 +31,7 @@ public class User implements Serializable {
     private String encryptedPassword;
 
     @OneToOne(targetEntity = Person.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name= "PersonId", nullable = false)
+    @JoinColumn(name= "PERSON_ID", nullable = false)
     private Person person;
 
     @OneToMany(targetEntity = Role.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")

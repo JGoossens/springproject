@@ -5,6 +5,7 @@ import be.kdg.springproject.dom.shopping.CartItem;
 import be.kdg.springproject.dom.shopping.LineItem;
 import be.kdg.springproject.dom.shopping.Order;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -13,8 +14,14 @@ import java.util.Collection;
  *
  * @author wouter
  */
+@Entity
+@DiscriminatorValue("ROLE_CLIENT")
 public class Client extends Role {
+    @OneToOne(targetEntity = Cart.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "CART_ID")
     private Cart cart;
+
+    @OneToMany(targetEntity = Order.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Collection<Order> orders;
 
     public Client() {
