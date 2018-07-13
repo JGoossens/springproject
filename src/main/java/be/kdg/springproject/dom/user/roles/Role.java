@@ -2,8 +2,10 @@ package be.kdg.springproject.dom.user.roles;
 
 import be.kdg.springproject.dom.user.exceptions.UserException;
 import be.kdg.springproject.dom.user.User;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -44,6 +46,9 @@ public abstract class Role {
 
         return result.get();
     }
+
+    public abstract Collection<? extends GrantedAuthority> getAuthorities();
+
 
     public Integer getRoleId() {
         return roleId;

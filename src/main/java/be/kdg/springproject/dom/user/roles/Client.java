@@ -4,10 +4,13 @@ import be.kdg.springproject.dom.shopping.Cart;
 import be.kdg.springproject.dom.shopping.CartItem;
 import be.kdg.springproject.dom.shopping.LineItem;
 import be.kdg.springproject.dom.shopping.Order;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * A Client can post repairs to the system.
@@ -64,6 +67,13 @@ public class Client extends Role {
         this.orders = orders;
     }
 
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_CLIENT"));
+        return authorities;
+    }
 
     @Override
     public RoleType getRoleType() {
