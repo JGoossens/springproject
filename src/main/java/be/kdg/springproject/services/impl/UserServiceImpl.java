@@ -8,6 +8,7 @@ import be.kdg.springproject.dom.user.exceptions.UserException;
 import be.kdg.springproject.dom.user.roles.Client;
 import be.kdg.springproject.dom.user.roles.Role;
 import be.kdg.springproject.persistence.api.CartRepository;
+import be.kdg.springproject.persistence.api.ProductRepository;
 import be.kdg.springproject.persistence.api.UserRepository;
 import be.kdg.springproject.services.api.UserService;
 import be.kdg.springproject.services.exceptions.ProductServiceException;
@@ -24,12 +25,14 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepo;
     private final CartRepository cartRepo;
+    private final ProductRepository productRepo;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepo, CartRepository cartRepo, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepo, CartRepository cartRepo, ProductRepository productRepo, PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
         this.cartRepo = cartRepo;
+        this.productRepo = productRepo;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -105,12 +108,32 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Order checkOut(Integer userId) {
-        return null;
+        Order order = null;
+        User u = userRepo.findById(userId).get();
+        if (u == null)
+            throw new UserServiceException("User not found");
+        if(Role.hasRole(u, Client.class)){
+            Client client = Role.loadRole(u, Client.class);
+            order = client.createOrder();
+        }
+        if(order == null)
+            throw new UserServiceException("Failed to create order");
+        userRepo.save(u);
+        return order;
     }
 
     @Override
     public Integer getCartItemAmount(Integer userId, Integer productId) {
-        return null;
+        User u = userRepo.findById(userId).get();
+        Product p = productRepo.findById(productId).get();
+        if(p == null)
+            throw new ProductServiceException("Product not found");
+        if(u == null)
+            throw new UserServiceException("User not found");
+        Client c = tryCast(u);
+        Cart cart = c.getCart();
+
+        return cart.getCartItemAmount(p);
     }
 
     @Override
